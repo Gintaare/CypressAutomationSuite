@@ -1,6 +1,6 @@
 describe('Show the list of prices', () => {
     it.only('The List of Prices', () => {
-        cy.visit('http://automationpractice.com/index.php');
+        cy.visit(Cypress.config().baseUrl + 'index.php');
         cy.get('.content_price').find('.price.product-price').invoke('text').as('itemPrice');
         cy.get('@itemPrice').then($linkText => {
             var itemPrice = $linkText.split('$');

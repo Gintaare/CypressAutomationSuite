@@ -1,17 +1,15 @@
 describe('Test Contact Us form', () => {
 
-    it('Should be able to open contact form', () => {
-        cy.visit('http://automationpractice.com/index.php');
-        cy.get('#contact-link > a').click();
-
-    });
-
     beforeEach(() => {
-        cy.visit("http://automationpractice.com/index.php?controller=contact")
+        cy.visit(Cypress.config().baseUrl + "index.php?controller=contact")
     })
 
+    it('Should be able to open contact form', () => {
+        cy.visit(Cypress.config().baseUrl + 'index.php');
+        cy.get('#contact-link > a').click();
+    });
 
-    it.only("Fields and labels should exist", () => {
+    it("Fields and labels should exist", () => {
         cy.get('#id_contact').should.exist
         cy.get('#email').should.exist
         cy.get('#message').should.exist
@@ -26,7 +24,6 @@ describe('Test Contact Us form', () => {
         cy.get("#submitMessage").click();
         cy.get("#center_column").should('contain', 'Your message has been successfully sent to our team.')
     });
-
 
     it('Empty Email Field should show an error', () => {
         cy.get("#submitMessage").click();
@@ -44,7 +41,6 @@ describe('Test Contact Us form', () => {
         cy.get("#submitMessage").click();
         cy.get("#center_column").should('contain', 'Invalid email address.')
     });
-
 });
 
 
