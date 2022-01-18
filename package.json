@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "open": "cypress open",
-    "test:dev": "cypress run --config-file cypress-dev.json",
-    "test:test": "cypress run --config-file cypress.json"
+    "start:dev": "cypress run --config-file cypress-dev.json",
+    "start:test": "cypress run --config-file cypress.json"
   },
   "author": "",
   "license": "ISC",

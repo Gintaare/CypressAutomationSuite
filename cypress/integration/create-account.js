@@ -132,4 +132,3 @@ it.only("Submited form should be accepted", () => {
         cy.get('#submitAccount').should.exist
     })
 })
-

@@ -1,29 +1,42 @@
 describe('Test Add Product to Cart', () => {
-  
 
-    it.only("Should be able to sign in", () => {
+    // Keep user session
+    afterEach(() => {
+        let str = [];
+        cy.getCookies().then((cook) => {
+            cy.log(cook);
+            for (let l = 0; l < cook.length; l++) {
+                if (cook.length > 0 && l == 0) {
+                    str[l] = cook[l].name;
+                    Cypress.Cookies.preserveOnce(str[l]);
+                } else if (cook.length > 1 && l > 1) {
+                    str[l] = cook[l].name;
+                    Cypress.Cookies.preserveOnce(str[l]);
+                }
+            }
+        })
+    })
+
+    it("Should be able to sign in", () => {
         cy.visit(Cypress.config().baseUrl + "index.php");
+
         cy.get(".login").click()
-        cy.get("#email").type('andrey@gmail.com')
-        cy.get("#passwd").type('Asdfw80')
+        cy.get("#email").type(Cypress.config().username)
+        cy.get("#passwd").type(Cypress.config().password)
         cy.get("#SubmitLogin").click()
         cy.get(".account").invoke('text').should('eq', 'Andrey Ivanovich')
     })
-  //TODO: Wrap komanda executinima antra kart gale
-    it.skip("Add specific product to basket", () => {
-        cy.go('back')
+
+    it("Add specific product to basket", () => {
         cy.visit(Cypress.config().baseUrl + "index.php");
-        cy.get(".product-name").each(($el, index, $list) => {
-            if ($el.text().includes('Faded Short Sleeve T-shirts')) {
-                cy.wrap($el).click()
+        cy.get(".product-name").contains("Faded Short Sleeve T-shirts").click({ force: true });
                 cy.get('#add_to_cart').click()
                 cy.get("a[title='Proceed to checkout']").click()
-            }
-            cy.get("#cart_title").should('contain', 'Shopping-cart summary')
-        });
+                cy.get("#cart_title").should('contain', 'Shopping-cart summary')
     });
+
     //TODO: nepasispaudzia du kartus add
-    it.skip("Increase the quantity of the item", () => {
+    it("Increase the quantity of the item", () => {
         cy.visit(Cypress.config().baseUrl + "index.php?id_product=1&controller=product")
         cy.get("#add_to_cart").click()
         cy.get("a[title='Proceed to checkout']").click()
@@ -75,6 +88,5 @@ describe('Test Add Product to Cart', () => {
         cy.get("a[title='Close']").click()
         cy.visit(Cypress.config().baseUrl + 'index.php?fc=module&module=blockwishlist&controller=mywishlist')
         cy.get(".align_center").invoke('text').should('eq', 2)
-
     })
 });
