@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "open": "cypress open",
-    "start:dev": "cypress run --config-file cypress-dev.json",
-    "start:test": "cypress run --config-file cypress.json"
+    "test:ci": "cypress run --config-file cypress.json",
+    "test:ci:dev": "cypress run --config-file cypress-dev.json"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^6.0.0-alpha.3",
     "cypress": "^8.5.0",
+    "cypress-file-upload": "^5.0.8",
     "cypress-xpath": "^1.6.2"
   },
   "dependencies": {}
