@@ -134,6 +134,7 @@ describe("Test ´Create an Account´ form ", () => {
         cy.get("#SubmitLogin").click()
 
         // Assert
-        cy.get(".account").invoke('text').should('eq', 'Andrey Ivanovich')
+        cy.get(".account").invoke('text').should('eq', user1.firstName + " " + user1.lastName)
+        cy.get('.info-account').should('contain', "Welcome to your account. Here you can manage all of your personal information and orders.")
     })
 })

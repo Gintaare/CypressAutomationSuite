@@ -22,7 +22,8 @@ const user1 = {
   alias: f.lorem.words(2)
 }
 
-// don't forget to export the list
 module.exports = {
   user1,
 }
+
+

@@ -41,19 +41,21 @@ describe('Make sure that Dresses elements work', () => {
             var pricesElements = cy.get('.price.product-price', { timeout: 30000 });
 
             pricesElements.each(elem => {
-              var text = elem.text().replace("$","")
-              var num = parseFloat(text)
-              prices.push(num);        
+                var text = elem.text().replace("$", "")
+                var num = parseFloat(text)
+                prices.push(num);
             }).then(obj => {
-        
-              var prices_sort = Array.from(prices)
-              prices_sort = prices_sort.sort((a, b) => a - b)
 
-              for (let i = 0; i < prices.length; i++) {
-                expect(prices[i]).to.be.eq(prices_sort[i])
-              }
+                var prices_sort = Array.from(prices)
+                prices_sort = prices_sort.sort((a, b) => a - b)
+
+                for (let i = 0; i < prices.length; i++) {
+                    expect(prices[i]).to.be.eq(prices_sort[i])
+                }
             });
         });
- });
+    });
+
+
 
 });
